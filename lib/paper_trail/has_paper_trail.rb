@@ -149,7 +149,12 @@ module PaperTrail
 
       def record_create
         if switched_on?
-          send(self.class.versions_association_name).create merge_metadata(:event => 'create', :whodunnit => PaperTrail.whodunnit, :object => object_to_string(self))
+          puts item_before_changed.to_yaml rescue nil
+          puts self.to_yaml rescue nil
+          send(self.class.versions_association_name).create merge_metadata(
+                                                                :event => 'create',
+                                                                :whodunnit => PaperTrail.whodunnit,
+                                                                :object => object_to_string(item_before_change))
         end
       end
 
