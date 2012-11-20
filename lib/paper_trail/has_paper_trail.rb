@@ -147,7 +147,8 @@ module PaperTrail
         if switched_on?
           data = {
             :event     => 'create',
-            :whodunnit => PaperTrail.whodunnit
+            :whodunnit => PaperTrail.whodunnit,
+            :object => object_to_string(self)
           }
 
           if changed_notably? and version_class.column_names.include?('object_changes')
